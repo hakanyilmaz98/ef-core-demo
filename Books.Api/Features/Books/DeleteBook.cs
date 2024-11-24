@@ -11,7 +11,9 @@ public class DeleteBook
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapDelete("books/{id}", Handle).WithTags(EndpointTags.Books);
+            app.MapDelete("books/{id}", Handle)
+                .WithTags(EndpointTags.Books)
+                .WithOpenApi();
         }
 
         public static async Task<IResult> Handle(

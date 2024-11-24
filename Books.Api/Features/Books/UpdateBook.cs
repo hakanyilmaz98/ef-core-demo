@@ -16,7 +16,8 @@ public class UpdateBook
         {
             app.MapPut("books/{id}", Handle)
                 .AddValidationFilter<BookRequest>()
-                .WithTags(EndpointTags.Books);
+                .WithTags(EndpointTags.Books)
+                .WithOpenApi();
         }
 
         public static async Task<IResult> Handle(
