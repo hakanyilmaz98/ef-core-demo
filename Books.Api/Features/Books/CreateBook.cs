@@ -24,13 +24,22 @@ public static class CreateBook
             [FromBody] BookRequest request,
             [FromServices] IBookRepository bookRepository)
         {
+            var isNotUnqique = await bookRepository.ExistsAsync(request.Isbn);
+
+            if (isNotUnqique)
+            {
+                return TypedResults.Problem(
+                    statusCode: StatusCodes.Status409Conflict,
+                    detail: $"ISBN {request.Isbn} must be unique");
+            }
+
             var book = request.MapToBook();
 
             await bookRepository.AddAsync(book);
 
             var response = book.MapToResponse();
 
-            return TypedResults.Created($"book/{book.Id}", response);
+            return TypedResults.Created($"books/{book.Id}", response);
         }
     }
 }

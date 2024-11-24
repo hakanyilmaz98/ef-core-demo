@@ -14,16 +14,18 @@ public class BookRepository : IBookRepository
         return book;
     }
 
+    public async Task<bool> ExistsAsync(string isbn)
+    {
+        return _books.Exists(b => b.Isbn == isbn);
+    }
+
     public async Task<bool> DeleteAsync(Guid id)
     {
         var book = _books.Find(b => b.Id == id);
 
-        if (book is null)
-        {
-            return false;
-        }
-
-        return _books.Remove(book);
+        return book is not null
+            ? _books.Remove(book)
+            : false;
     }
 
     public async Task<IReadOnlyList<Book>> GetAsync()
@@ -31,23 +33,18 @@ public class BookRepository : IBookRepository
         return _books.AsReadOnly();
     }
 
-    public async Task<Book?> GetByIdAsync(Guid Id)
+    public async Task<Book?> GetByIdAsync(Guid id)
     {
-        return _books.Find(b => b.Id == Id);
+        return _books.Find(b => b.Id == id);
     }
 
-    public async Task<Book?> UpdateAsync(Book book)
+    public async Task<Book> UpdateAsync(Book updatedBook)
     {
-        var bookToUpdate = _books.Find(b => b.Id == book.Id);
+        var book = _books.First(b => b.Id == updatedBook.Id);
 
-        if (bookToUpdate is null)
-        {
-            return null;
-        }
-
-        bookToUpdate.Title = book.Title;
-        bookToUpdate.Isbn = book.Isbn;
-        bookToUpdate.Author = book.Author;
+        book.Title = updatedBook.Title;
+        book.Isbn = updatedBook.Isbn;
+        book.Author = updatedBook.Author;
 
         return book;
     }

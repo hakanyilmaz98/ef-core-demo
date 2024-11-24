@@ -9,7 +9,11 @@ public class BookRequestValidator : AbstractValidator<BookRequest>
     {
         RuleFor(r => r.Title)
                 .NotEmpty()
-                .MaximumLength(150);
+                .MaximumLength(200);
+
+        RuleFor(r => r.Author)
+                .NotEmpty()
+                .MaximumLength(200);
 
         RuleFor(r => r.Isbn)
             .NotEmpty()
