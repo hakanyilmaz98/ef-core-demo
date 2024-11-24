@@ -14,4 +14,13 @@ public static class BookMapper
 
     public static IReadOnlyList<BookResponse> MapToResponse(this IEnumerable<Book> books) =>
         books.Select(MapToResponse).ToList();
+
+    public static Book MapToBook(this BookRequest request, Guid? id = null) =>
+        new Book
+        {
+            Id = id is null ? Guid.NewGuid() : (Guid)id,
+            Title = request.Title,
+            Isbn = request.Isbn,
+            Author = request.Author
+        };
 }

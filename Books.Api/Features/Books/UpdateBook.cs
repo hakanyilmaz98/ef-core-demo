@@ -1,7 +1,6 @@
 ﻿using Books.Api.Abstractions.Endpoints;
 using Books.Api.Abstractions.Repositories;
 using Books.Api.Constants;
-using Books.Api.Entities;
 using Books.Api.Extensions;
 using Books.Api.Features.Books.Shared.Contracts;
 using Books.Api.Features.Books.Shared.Mapping;
@@ -21,13 +20,7 @@ public class UpdateBook
 
         public static async Task<IResult> Handle(Guid id, BookRequest request, IBookRepository bookRepository)
         {
-            var book = new Book
-            {
-                Id = id,
-                Title = request.Title,
-                Isbn = request.Isbn,
-                Author = request.Author
-            };
+            var book = request.MapToBook(id);
 
             var updatedBook = await bookRepository.UpdateAsync(book);
 
