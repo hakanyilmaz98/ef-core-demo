@@ -22,7 +22,8 @@ public class GetBooks
         {
             var books = await bookRepository.GetAsync();
 
-            var mapped = books.Select(b => new BookResponse(b.Id, b.Title, b.Isbn));
+            var mapped = books.Select(book =>
+                new BookResponse(book.Id, book.Title, book.Isbn, book.Author));
 
             return TypedResults.Ok(new Response(mapped));
         }

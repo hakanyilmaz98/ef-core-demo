@@ -22,8 +22,10 @@ public class UpdateBook
         {
             var book = new Book
             {
+                Id = id,
                 Title = request.Title,
-                Isbn = request.Isbn
+                Isbn = request.Isbn,
+                Author = request.Author
             };
 
             var updatedBook = await bookRepository.UpdateAsync(id, book);

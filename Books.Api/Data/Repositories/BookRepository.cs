@@ -16,7 +16,7 @@ public class BookRepository : IBookRepository
 
     public async Task<bool> DeleteAsync(Guid id)
     {
-        var book = _books.FirstOrDefault(b => b.Id == id);
+        var book = _books.Find(b => b.Id == id);
 
         if (book is null)
         {
@@ -33,20 +33,21 @@ public class BookRepository : IBookRepository
 
     public async Task<Book?> GetByIdAsync(Guid Id)
     {
-        return _books.FirstOrDefault(b => b.Id == Id);
+        return _books.Find(b => b.Id == Id);
     }
 
-    public async Task<Book?> UpdateAsync(Guid id, Book updated)
+    public async Task<Book?> UpdateAsync(Book book)
     {
-        var book = _books.FirstOrDefault(b => b.Id == id);
+        var bookToUpdate = _books.Find(b => b.Id == book.Id);
 
-        if (book is null)
+        if (bookToUpdate is null)
         {
             return null;
         }
 
-        book.Title = updated.Title;
-        book.Isbn = updated.Isbn;
+        bookToUpdate.Title = book.Title;
+        bookToUpdate.Isbn = book.Isbn;
+        bookToUpdate.Author = book.Author;
 
         return book;
     }

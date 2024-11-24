@@ -25,12 +25,13 @@ public static class CreateBook
             {
                 Id = Guid.NewGuid(),
                 Title = request.Title,
-                Isbn = request.Isbn
+                Isbn = request.Isbn,
+                Author = request.Author,
             };
 
             await bookRepository.AddAsync(book);
 
-            var response = new BookResponse(book.Id, book.Title, book.Isbn);
+            var response = new BookResponse(book.Id, book.Title, book.Isbn, book.Author);
 
             return TypedResults.Created($"book/{book.Id}", response);
         }

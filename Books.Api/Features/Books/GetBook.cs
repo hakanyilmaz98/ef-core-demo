@@ -21,7 +21,7 @@ public class GetBook
             var book = await bookRepository.GetByIdAsync(id);
 
             return book is not null
-                ? TypedResults.Ok(new BookResponse(book.Id, book.Title, book.Isbn))
+                ? TypedResults.Ok(new BookResponse(book.Id, book.Title, book.Isbn, book.Author))
                 : TypedResults.NotFound();
         }
     }
