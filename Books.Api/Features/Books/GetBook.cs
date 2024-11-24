@@ -2,6 +2,7 @@
 using Books.Api.Abstractions.Repositories;
 using Books.Api.Constants;
 using Books.Api.Features.Books.Shared.Mapping;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Api.Features.Books;
 
@@ -16,7 +17,9 @@ public class GetBook
                 .WithOpenApi();
         }
 
-        public static async Task<IResult> Handle(Guid id, IBookRepository bookRepository)
+        public static async Task<IResult> Handle(
+            [FromRoute] Guid id,
+            [FromServices] IBookRepository bookRepository)
         {
             var book = await bookRepository.GetByIdAsync(id);
 

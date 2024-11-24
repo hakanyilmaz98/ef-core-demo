@@ -4,6 +4,7 @@ using Books.Api.Constants;
 using Books.Api.Extensions;
 using Books.Api.Features.Books.Shared.Contracts;
 using Books.Api.Features.Books.Shared.Mapping;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Api.Features.Books;
 
@@ -18,7 +19,10 @@ public class UpdateBook
                 .WithTags(EndpointTags.Books);
         }
 
-        public static async Task<IResult> Handle(Guid id, BookRequest request, IBookRepository bookRepository)
+        public static async Task<IResult> Handle(
+            [FromRoute] Guid id,
+            [FromBody] BookRequest request,
+            [FromServices] IBookRepository bookRepository)
         {
             var book = request.MapToBook(id);
 

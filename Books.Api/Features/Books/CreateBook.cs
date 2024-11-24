@@ -4,6 +4,7 @@ using Books.Api.Constants;
 using Books.Api.Extensions;
 using Books.Api.Features.Books.Shared.Contracts;
 using Books.Api.Features.Books.Shared.Mapping;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Api.Features.Books;
 
@@ -19,7 +20,9 @@ public static class CreateBook
                 .WithOpenApi();
         }
 
-        public static async Task<IResult> Handle(BookRequest request, IBookRepository bookRepository)
+        public static async Task<IResult> Handle(
+            [FromBody] BookRequest request,
+            [FromServices] IBookRepository bookRepository)
         {
             var book = request.MapToBook();
 

@@ -3,6 +3,7 @@ using Books.Api.Abstractions.Repositories;
 using Books.Api.Constants;
 using Books.Api.Features.Books.Shared.Contracts;
 using Books.Api.Features.Books.Shared.Mapping;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Books.Api.Features.Books;
 
@@ -19,7 +20,7 @@ public class GetBooks
                 .WithOpenApi();
         }
 
-        public static async Task<IResult> Handle(IBookRepository bookRepository)
+        public static async Task<IResult> Handle([FromServices] IBookRepository bookRepository)
         {
             var books = await bookRepository.GetAsync();
 
