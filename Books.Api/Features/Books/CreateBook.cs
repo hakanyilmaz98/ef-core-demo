@@ -25,7 +25,7 @@ public static class CreateBook
 
             await bookRepository.AddAsync(book);
 
-            var response = new BookResponse(book.Id, book.Title, book.Isbn, book.Author);
+            var response = book.MapToResponse();
 
             return TypedResults.Created($"book/{book.Id}", response);
         }
