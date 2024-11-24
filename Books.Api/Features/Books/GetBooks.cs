@@ -15,7 +15,7 @@ public class GetBooks
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
             app.MapGet("books", Handle)
-                .WithTags(EndpointTag.Books)
+                .WithTags(EndpointTags.Books)
                 .WithOpenApi();
         }
 

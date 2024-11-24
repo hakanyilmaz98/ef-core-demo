@@ -15,7 +15,7 @@ public static class CreateBook
         {
             app.MapPost("/books", Handle)
                 .AddValidationFilter<BookRequest>()
-                .WithTags(EndpointTag.Books)
+                .WithTags(EndpointTags.Books)
                 .WithOpenApi();
         }
 

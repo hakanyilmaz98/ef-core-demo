@@ -10,7 +10,7 @@ public class DeleteBook
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapDelete("books/{id}", Handle).WithTags(EndpointTag.Books);
+            app.MapDelete("books/{id}", Handle).WithTags(EndpointTags.Books);
         }
 
         public static async Task<IResult> Handle(Guid id, IBookRepository bookRepository)

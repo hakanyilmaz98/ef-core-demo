@@ -1,6 +1,6 @@
 ﻿namespace Books.Api.Constants;
 
-public static class EndpointTag
+public static class EndpointTags
 {
     public const string Books = "Books";
 }
