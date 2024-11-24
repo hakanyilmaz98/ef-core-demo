@@ -1,7 +1,7 @@
 ﻿using Books.Api.Abstractions.Endpoints;
 using Books.Api.Abstractions.Repositories;
 using Books.Api.Constants;
-using Books.Api.Features.Books.Shared.Contracts;
+using Books.Api.Features.Books.Shared.Mapping;
 
 namespace Books.Api.Features.Books;
 
@@ -21,7 +21,7 @@ public class GetBook
             var book = await bookRepository.GetByIdAsync(id);
 
             return book is not null
-                ? TypedResults.Ok(new BookResponse(book.Id, book.Title, book.Isbn, book.Author))
+                ? TypedResults.Ok(book.MapToResponse())
                 : TypedResults.NotFound();
         }
     }

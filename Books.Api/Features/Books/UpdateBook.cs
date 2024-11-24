@@ -4,6 +4,7 @@ using Books.Api.Constants;
 using Books.Api.Entities;
 using Books.Api.Extensions;
 using Books.Api.Features.Books.Shared.Contracts;
+using Books.Api.Features.Books.Shared.Mapping;
 
 namespace Books.Api.Features.Books;
 
@@ -28,10 +29,10 @@ public class UpdateBook
                 Author = request.Author
             };
 
-            var updatedBook = await bookRepository.UpdateAsync(id, book);
+            var updatedBook = await bookRepository.UpdateAsync(book);
 
             return updatedBook is not null
-                ? TypedResults.Ok(new BookResponse(updatedBook.Id, updatedBook.Title, updatedBook.Isbn))
+                ? TypedResults.Ok(updatedBook.MapToResponse())
                 : TypedResults.NotFound();
         }
     }

@@ -2,6 +2,7 @@
 using Books.Api.Abstractions.Repositories;
 using Books.Api.Constants;
 using Books.Api.Features.Books.Shared.Contracts;
+using Books.Api.Features.Books.Shared.Mapping;
 
 namespace Books.Api.Features.Books;
 
@@ -22,10 +23,7 @@ public class GetBooks
         {
             var books = await bookRepository.GetAsync();
 
-            var mapped = books.Select(book =>
-                new BookResponse(book.Id, book.Title, book.Isbn, book.Author));
-
-            return TypedResults.Ok(new Response(mapped));
+            return TypedResults.Ok(new Response(books.MapToResponse()));
         }
     }
 }
