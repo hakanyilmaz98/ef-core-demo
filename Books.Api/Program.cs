@@ -24,7 +24,6 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.MapScalarApiReference();
-    app.UseDeveloperExceptionPage();
 }
 
 app.UseExceptionHandler();
