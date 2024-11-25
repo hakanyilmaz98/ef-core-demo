@@ -1,17 +1,13 @@
 ﻿using Books.Api.Features.Books.Shared.Contracts;
 using FluentValidation;
 
-namespace Books.Api.Features.Books.Shared.Validators;
+namespace Books.Api.Features.Books.Shared.Validation;
 
 public class BookRequestValidator : AbstractValidator<BookRequest>
 {
     public BookRequestValidator()
     {
         RuleFor(r => r.Title)
-                .NotEmpty()
-                .MaximumLength(200);
-
-        RuleFor(r => r.Author)
                 .NotEmpty()
                 .MaximumLength(200);
 

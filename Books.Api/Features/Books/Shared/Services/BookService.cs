@@ -1,9 +1,9 @@
-﻿using Books.Api.Abstractions.Repositories;
+﻿using Books.Api.Abstractions.Services;
 using Books.Api.Entities;
 
-namespace Books.Api.Data.Repositories;
+namespace Books.Api.Features.Books.Shared.Services;
 
-public class BookRepository : IBookRepository
+public class BookService : IBookService
 {
     private static readonly List<Book> _books = [];
 
@@ -44,7 +44,6 @@ public class BookRepository : IBookRepository
 
         book.Title = updatedBook.Title;
         book.Isbn = updatedBook.Isbn;
-        book.Author = updatedBook.Author;
 
         return book;
     }

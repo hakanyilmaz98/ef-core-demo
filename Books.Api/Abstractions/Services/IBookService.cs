@@ -1,8 +1,8 @@
 ﻿using Books.Api.Entities;
 
-namespace Books.Api.Abstractions.Repositories;
+namespace Books.Api.Abstractions.Services;
 
-public interface IBookRepository
+public interface IBookService
 {
     public Task<Book> AddAsync(Book book);
     public Task<bool> ExistsAsync(string isbn);

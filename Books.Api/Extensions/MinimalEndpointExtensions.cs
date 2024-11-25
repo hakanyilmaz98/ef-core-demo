@@ -6,9 +6,9 @@ namespace Books.Api.Extensions;
 
 public static class MinimalEndpointExtensions
 {
-    public static IServiceCollection AddMinimalEndpoints(this IServiceCollection services)
+    public static IServiceCollection AddEndpointsFromAssemblyContaining<T>(this IServiceCollection services)
     {
-        var serviceDescriptors = typeof(Program).Assembly
+        var serviceDescriptors = typeof(T).Assembly
         .DefinedTypes
         .Where(type => type is { IsAbstract: false, IsInterface: false } &&
                        type.IsAssignableTo(typeof(IMinimalEndpoint)))
@@ -20,7 +20,7 @@ public static class MinimalEndpointExtensions
         return services;
     }
 
-    public static IApplicationBuilder MapMinimalEndpoints(this WebApplication app)
+    public static IApplicationBuilder MapEndpoints(this WebApplication app)
     {
         IEnumerable<IMinimalEndpoint> endpoints = app.Services
             .GetRequiredService<IEnumerable<IMinimalEndpoint>>();
