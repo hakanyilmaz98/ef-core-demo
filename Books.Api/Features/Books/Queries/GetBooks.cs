@@ -2,6 +2,7 @@
 using Books.Api.Abstractions.Messaging;
 using Books.Api.Abstractions.Services;
 using Books.Api.Constants;
+using Books.Api.Features.Books.Shared.Contracts;
 using Books.Api.Features.Books.Shared.Mapping;
 using MediatR;
 
@@ -10,6 +11,7 @@ namespace Books.Api.Features.Books.Queries;
 public static class GetBooks
 {
     public record Query() : IEndpointRequest;
+    public record Response(IEnumerable<BookResponse> Books);
 
     public class Endpoint : IMinimalEndpoint
     {
@@ -30,7 +32,9 @@ public static class GetBooks
         {
             var books = await bookRepository.GetAsync();
 
-            return TypedResults.Ok(books.MapToResponse());
+            var response = new Response(books.MapToResponse());
+
+            return TypedResults.Ok(response);
         }
     }
 }
