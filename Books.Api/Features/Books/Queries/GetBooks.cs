@@ -26,7 +26,7 @@ public static class GetBooks
         }
     }
 
-    public class Handler(IBookService bookRepository) : IEndpointRequestHandler<Query>
+    public class Handler(IBookRepository bookRepository) : IEndpointRequestHandler<Query>
     {
         public async Task<IResult> Handle(Query request, CancellationToken cancellationToken)
         {

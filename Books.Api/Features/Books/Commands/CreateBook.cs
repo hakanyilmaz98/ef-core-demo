@@ -30,7 +30,7 @@ public static class CreateBook
         }
     }
 
-    public class Handler(IBookService bookRepository) : IEndpointRequestHandler<Command>
+    public class Handler(IBookRepository bookRepository) : IEndpointRequestHandler<Command>
     {
         public async Task<IResult> Handle(Command request, CancellationToken cancellationToken)
         {

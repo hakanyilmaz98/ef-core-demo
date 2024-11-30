@@ -3,7 +3,7 @@ using Books.Api.Entities;
 
 namespace Books.Api.Features.Books.Shared.Services;
 
-public class BookService : IBookService
+public class BookRepository : IBookRepository
 {
     private static readonly List<Book> _books = [];
 

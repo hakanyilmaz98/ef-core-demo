@@ -2,7 +2,7 @@
 
 namespace Books.Api.Abstractions.Services;
 
-public interface IBookService
+public interface IBookRepository
 {
     public Task<Book> AddAsync(Book book);
     public Task<bool> ExistsAsync(string isbn);
